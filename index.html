@@ -1,0 +1,354 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Angular</title>
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/black.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+	<!-- <link rel="stylesheet" href="lib/css/zenburn.css"> -->
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+
+	<style>
+		h1 .bigger {
+			font-size: 3.5em !important;
+		}
+
+		h2,
+		h3,
+		h4,
+		h5,
+		h6 {
+			text-transform: unset !important;
+		}
+
+		.angular {
+			color: #DD0031 !important;
+		}
+
+		.no-border-img {
+			background: unset !important;
+			border: unset !important;
+			box-shadow: unset !important;
+		}
+
+		.slides {
+			width: 80% !important;
+		}
+
+		.med-text {
+			font-size: 60px;
+		}
+
+		.large-text {
+			font-size: 100px;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<section>
+				<section>
+					<img class="stretch no-border-img" data-src="media/angular.svg">
+				</section>
+				<section>
+					<h1 class="bigger angular">Angular</h1>
+					<h3>Jan Greger Hemb</h3>
+					<h5>bit.ly</h5>
+				</section>
+				<section>
+					<h2>What is <span class="angular">Angular</span>, and why use it?</h2>
+				</section>
+			</section>
+			<section>
+				<!-- <h1>The birth of the SPA</h1> -->
+				<h1>
+					<span class="angular">S</span>ingle
+					<span class="angular">P</span>age
+					<span class="angular">A</span>pplication
+				</h1>
+				<h2 class="fragment">It's all just <span class="angular">index.html</span></h2>
+			</section>
+			<section>
+				<section>
+					<h1>Angular in a nutshell</h1>
+					<ui>
+						<li class="fragment">Framework for developing applications</li>
+						<li class="fragment">Includes all you need to make a SPA</li>
+						<li class="fragment">Significantly speeds up development</li>
+						<li class="fragment">All inclusive, a complete framework</li>
+					</ui>
+				</section>
+			</section>
+
+			<section>
+				<h1>The core building blocks</h1>
+			</section>
+			<section>
+				<section>
+					<h2 class="angular">Component</h2>
+					<p>B rwaking website down into smaller components</p>
+					<p>Typescript, HTML, CSS</p>
+					<p>Typescript is superset of Javascript</p>
+				</section>
+				<section>
+					<pre><code class="TypeScript" data-trim contenteditable>
+// TypeScript (home.component.ts)
+@Component({
+	selector: 'app-home', // use as <app-home></app-home>
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
+})
+export class HomeComponent {
+	name = 'Greger';
+}							  
+					</code></pre>
+
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML (home.component.html) -->
+<h1 class="title">Welcome home {{name}}</h1>
+					</code></pre>
+					<pre><code class="SCSS" data-trim contenteditable>
+// SCSS/CSS (home.component.scss)
+.title {
+	color: red;
+}
+					</code></pre>
+				</section>
+				<section>
+					<h3>Life cycle hooks</h3>
+					<pre><code class="TypeScript" data-trim contenteditable>
+@Component({
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements OnInit, OnDestroy {
+	
+	constructor() { } // Should not use
+
+	ngOnInit() { } // Right before start
+
+	ngOnDestroy() { } // Right before destroyed
+}							  
+					</code></pre>
+				</section>
+
+				<section>
+					<h2>Using component</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML -->
+<main class="content">
+	<app-home></app-home>
+</main>
+					</code></pre>
+				</section>
+
+				<section>
+					<h2><span class="angular">Component</span> features</h2>
+					<p>3 files + test file</p>
+					<p>Lifecycle hooks</p>
+					<p>Dependeicy injection</p>
+					<p>Inputs and outputs</p>
+				</section>
+
+				<section>
+					<h3>Inputs and outputs</h3>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML -->
+<app-home [user]="'Greger'"></app-home>
+					</code></pre>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// TypeScript (home.component.ts)
+@Component({
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
+})
+export class HomeComponent {
+	@Input() user = ''; // Will become Greger
+	@Output() newUser = new EventEmitter();
+
+	changeUser() {
+		this.newUser.emit('Jan');
+	}
+}							  
+					</code></pre>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- HTML -->
+<app-home (newUser)="setNewUser($event)"></app-home>
+					</code></pre>
+				</section>
+				<section>
+					Structural directives
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- ngIf -->
+<div *ngIf="loading">Loading</div>
+					</code></pre>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- ngFor -->
+<div *ngFor="let user of users">user{{user.name}}</div>
+					</code></pre>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- ng-container -->
+<ng-container *ngIf="loading">Loading</ng-container>
+					</code></pre>
+					<ul>
+						<li class="fragment">ng-content</li>
+						<li class="fragment">ng-template</li>
+						<li class="fragment">*ngSwitch</li>
+					</ul>
+				</section>
+				<section>
+					DI? or after services
+				</section>
+
+			</section>
+
+			<section>
+				<section>
+					<h1 class="angular">Servicers</h1>
+					<h3 class="fragment">State, and talking to the backend</h3>
+					<h3 class="fragment">Singleton with DI</h3>
+				</section>
+				<section>
+					<pre class=""><code class="TypeScript" data-trim contenteditable>
+// home.service.ts
+@Injectable({
+	providedIn: 'root'
+})
+export class HomeService {
+	
+	activeUser = 'Greger';
+	
+	constructor() { }
+	
+	getActiveUser() { ... }
+	
+}
+					</code></pre>
+				</section>
+				<section>
+					<p>Uses RxJS for async communication</p>
+					<!-- TODo what is rxjs -->
+				</section>
+				<section>
+					<h2>Dependency injection (DI)</h2>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// home.service.ts
+@Injectable({
+	providedIn: 'root'
+})
+export class HomeService {
+	activeUser = 'Greger';
+	constructor() { }
+}
+					</code></pre>
+
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// home.component.ts
+@Component({
+	...
+})
+export class HomeComponent implements OnInit {
+	constructor(private homeService: HomeService) { }
+	ngOnInit() {
+		console.log(this.homeService.activeUser);
+	}
+}							  
+					</code></pre>
+				</section>
+				<section>
+					Uses DI to decrease tight coopeling and make testing easer as DI service can be swapped for mock
+				</section>
+
+			</section>
+
+			<section>
+
+				<section>
+					<h1 class="angular">Modules</h1>
+					<h3>Collection of components, and other elements</h3>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// home.module.ts
+@NgModule({
+	imports: [CommonModule, SomeOtherModule],
+	declarations: [HomeComponent],
+	exports: [HomeComponent]
+})
+export class HomeModule { }							  
+				</code></pre>
+				</section>
+				<section>
+					<h2>Encapsulation of features</h2>
+				</section>
+			</section>
+			<section>
+				<section>
+					<h1 class="angular">Routing</h1>
+					<h3>Eagerly loading vs Lazy loading</h3>
+
+				</section>
+				<section>
+					<pre class=""><code class="TypeScript" data-trim contenteditable>
+<!-- Eager (default) -->
+const routes: Routes = [{
+	path: 'home',
+	component: HomeComponent,
+}]; 
+export const HomeRoutes = RouterModule.forChild(routes);
+					</code></pre>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+<!-- Lazy -->
+const routes: Routes = [{
+	path: 'home',
+	loadChildren: () => import('./home.module').then(mod => mod.HomeModule)
+}]; 
+export const HomeRoutes = RouterModule.forChild(routes);
+					</code></pre>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- HTML -->
+<router-outlet></router-outlet>
+					</code></pre>
+				</section>
+
+			</section>
+		</div>
+	</div>
+
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
