@@ -58,6 +58,25 @@
 		.large-text {
 			font-size: 100px;
 		}
+
+		.flex-icon-row {
+			display: flex;
+			flex-direction: row;
+			justify-content: space-between;
+		}
+
+		.flex-icon {
+			width: 180px;
+			text-align: center;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			font-size: 30px;
+			/* align-items: ; */
+		}
+		.flex-icon-img {
+
+		}
 	</style>
 </head>
 
@@ -99,14 +118,65 @@
 			</section>
 
 			<section>
-				<h1>The core building blocks</h1>
+					<h2>Features</h2>
+				<div class="flex-icon-row fragment">
+					<div class="flex-icon">
+						<img class="stretch no-border-img" src="media/icons/templates.svg">
+						Components
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/compiler.svg">
+						Compiler
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/forms.svg">
+						Forms
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/http.svg">
+						Http
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/router.svg">
+						Router
+					</div>
+				</div>
+				<div class="flex-icon-row fragment">
+					<div class="flex-icon">
+						<img class="stretch no-border-img" src="media/icons/cli.svg">
+						Cli
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/dependency-injection.svg">
+						DI
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/lazy-loading.svg">
+						Lazy-Loading
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/pwa.svg">
+						PWA
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/components.svg">
+						Components
+					</div>
+				</div>
+				<!-- <h1>Angular</h1> -->
+			</section>
+			<section>
+				<h2>You don't have to learn it all</h2>
+				<h3 class="fragment">Just some core features</h3>
 			</section>
 			<section>
 				<section>
 					<h2 class="angular">Component</h2>
-					<p>B rwaking website down into smaller components</p>
-					<p>Typescript, HTML, CSS</p>
-					<p>Typescript is superset of Javascript</p>
+					<p class="fragment">Controls a part of the screen 🖥️</p>
+					<p class="fragment">View, style and logic</p>
+					<p class="fragment">HTML, CSS and TypeScript</p>
+					<!-- <p class="fragment">Typescript is superset of Javascript</p> -->
+					<p class="fragment">Re-usable ♻️</p>
 				</section>
 				<section>
 					<pre><code class="TypeScript" data-trim contenteditable>
@@ -123,7 +193,7 @@ export class HomeComponent {
 
 					<pre><code class="HTML" data-trim contenteditable>
 <!-- HTML (home.component.html) -->
-<h1 class="title">Welcome home {{name}}</h1>
+<h1 class="title">Welcome home {{name}} in red</h1>
 					</code></pre>
 					<pre><code class="SCSS" data-trim contenteditable>
 // SCSS/CSS (home.component.scss)
@@ -153,26 +223,39 @@ export class HomeComponent implements OnInit, OnDestroy {
 
 				<section>
 					<h2>Using component</h2>
-					<pre><code class="HTML" data-trim contenteditable>
-<!-- HTML -->
+
+					<pre><code class="TypeScript" data-trim contenteditable>
+// TypeScript (home.component.ts)
+@Component({
+	selector: 'app-home', // use as <app-home></app-home>
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
+})
+export class HomeComponent {
+	name = 'Greger';
+}							  
+					</code></pre>
+
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- HTML (parent component) -->
 <main class="content">
 	<app-home></app-home>
 </main>
 					</code></pre>
 				</section>
 
-				<section>
+				<!-- <section>
 					<h2><span class="angular">Component</span> features</h2>
-					<p>3 files + test file</p>
-					<p>Lifecycle hooks</p>
-					<p>Dependeicy injection</p>
-					<p>Inputs and outputs</p>
-				</section>
+					<p class="fragment">3 files + test file</p>
+					<p class="fragment">Lifecycle hooks</p>
+					<p class="fragment">Dependeicy injection</p>
+					<p class="fragment">Inputs and outputs</p>
+				</section> -->
 
 				<section>
-					<h3>Inputs and outputs</h3>
+					<h3>Inputs</h3>
 					<pre><code class="HTML" data-trim contenteditable>
-<!-- HTML -->
+<!-- HTML (parent component) -->
 <app-home [user]="'Greger'"></app-home>
 					</code></pre>
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
@@ -184,6 +267,20 @@ export class HomeComponent implements OnInit, OnDestroy {
 })
 export class HomeComponent {
 	@Input() user = ''; // Will become Greger
+}							  
+					</code></pre>
+				</section>
+
+				<section>
+					<h3>Output</h3>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// TypeScript (home.component.ts)
+@Component({
+	selector: 'app-home',
+	templateUrl: './home.component.html',
+	styleUrls: ['./home.component.scss']
+})
+export class HomeComponent {
 	@Output() newUser = new EventEmitter();
 
 	changeUser() {
@@ -192,10 +289,12 @@ export class HomeComponent {
 }							  
 					</code></pre>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- HTML -->
+<!-- HTML (parent component) -->
 <app-home (newUser)="setNewUser($event)"></app-home>
 					</code></pre>
 				</section>
+
+
 				<section>
 					Structural directives
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
