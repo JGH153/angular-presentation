@@ -74,9 +74,8 @@
 			font-size: 30px;
 			/* align-items: ; */
 		}
-		.flex-icon-img {
 
-		}
+		.flex-icon-img {}
 	</style>
 </head>
 
@@ -118,7 +117,7 @@
 			</section>
 
 			<section>
-					<h2>Features</h2>
+				<h2>Features</h2>
 				<div class="flex-icon-row fragment">
 					<div class="flex-icon">
 						<img class="stretch no-border-img" src="media/icons/templates.svg">
@@ -294,30 +293,45 @@ export class HomeComponent {
 					</code></pre>
 				</section>
 
+				<section>
+					<h2>ng-content</h2>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML (parent component) -->
+
+<app-home>Welcome</app-home>
+					</code></pre>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML (home.component.html) -->
+
+<ng-content></ng-content> 
+<!-- ng-content will be replaced by Welcome -->
+					</code></pre>
+					<p class="fragment">
+						projectAs="top" & select="top"
+					</p>
+				</section>
+
 
 				<section>
 					Structural directives
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- ngIf -->
+<!-- ngIf (loading = bool) -->
 <div *ngIf="loading">Loading</div>
 					</code></pre>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- ngFor -->
+<!-- ngFor (users = Array)-->
 <div *ngFor="let user of users">user{{user.name}}</div>
 					</code></pre>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- ng-container -->
+<!-- ng-container (loading = bool) -->
 <ng-container *ngIf="loading">Loading</ng-container>
 					</code></pre>
-					<ul>
-						<li class="fragment">ng-content</li>
-						<li class="fragment">ng-template</li>
-						<li class="fragment">*ngSwitch</li>
-					</ul>
+					<p class="fragment">ng-template</p>
+					<p class="fragment">*ngSwitch</p>
 				</section>
-				<section>
+				<!-- <section>
 					DI? or after services
-				</section>
+				</section> -->
 
 			</section>
 
@@ -337,22 +351,19 @@ export class HomeService {
 	
 	activeUser = 'Greger';
 	
-	constructor() { }
+	constructor(private http: HttpClient) { }
 	
-	getActiveUser() { ... }
-	
+	getActiveUser() {
+		return this.http.get('backend.no');
+	}
 }
 					</code></pre>
-				</section>
-				<section>
-					<p>Uses RxJS for async communication</p>
-					<!-- TODo what is rxjs -->
 				</section>
 				<section>
 					<h2>Dependency injection (DI)</h2>
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
 // home.service.ts
-@Injectable({
+@Injectable({  // <---- DI
 	providedIn: 'root'
 })
 export class HomeService {
@@ -367,16 +378,16 @@ export class HomeService {
 	...
 })
 export class HomeComponent implements OnInit {
-	constructor(private homeService: HomeService) { }
+	constructor(private homeService: HomeService) { } // <---- DI
 	ngOnInit() {
 		console.log(this.homeService.activeUser);
 	}
 }							  
 					</code></pre>
 				</section>
-				<section>
+				<!-- <section>
 					Uses DI to decrease tight coopeling and make testing easer as DI service can be swapped for mock
-				</section>
+				</section> -->
 
 			</section>
 
@@ -384,7 +395,9 @@ export class HomeComponent implements OnInit {
 
 				<section>
 					<h1 class="angular">Modules</h1>
-					<h3>Collection of components, and other elements</h3>
+					<!-- <h3>Collection of components, and other elements</h3> -->
+					<h3>Grouping relevant elements together</h3>
+					<h3 class="fragment">Create/declare components</h3>
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
 // home.module.ts
 @NgModule({
@@ -397,19 +410,20 @@ export class HomeModule { }
 				</section>
 				<section>
 					<h2>Encapsulation of features</h2>
+					<h2 class="fragment"><span class="angular">Feature</span> modules</h2>
 				</section>
 			</section>
 			<section>
 				<section>
 					<h1 class="angular">Routing</h1>
-					<h3>Eagerly loading vs Lazy loading</h3>
+					<h3>Eager loading vs Lazy loading</h3>
 
 				</section>
 				<section>
 					<pre class=""><code class="TypeScript" data-trim contenteditable>
 <!-- Eager (default) -->
 const routes: Routes = [{
-	path: 'home',
+	path: 'home', // localhost:4200/home
 	component: HomeComponent,
 }]; 
 export const HomeRoutes = RouterModule.forChild(routes);
@@ -417,7 +431,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
 <!-- Lazy -->
 const routes: Routes = [{
-	path: 'home',
+	path: 'home', // localhost:4200/home
 	loadChildren: () => import('./home.module').then(mod => mod.HomeModule)
 }]; 
 export const HomeRoutes = RouterModule.forChild(routes);
@@ -432,9 +446,10 @@ export const HomeRoutes = RouterModule.forChild(routes);
 
 			<section>
 				<section>
-					<h2>Directives</h2>
-					<h2>Pipes</h2>
-					<h2>Interceptors</h2>
+					<h1>Other core features</h1>
+					<h2 class="fragment">Directives</h2>
+					<h2 class="fragment">Pipes</h2>
+					<h2 class="fragment">Interceptors</h2>
 				</section>
 				<section>
 					<h2>Angular NPM Modules</h2>
@@ -455,9 +470,9 @@ export const HomeRoutes = RouterModule.forChild(routes);
 				<section>
 					<h2>Angular CLI</h2>
 					<!-- <h3>The most powerful frontend CLI</h3> -->
-					<p class="fragment">ng new my-new-app</p>
-					<p class="fragment">ng add a-cool-library</p>
-					<p class="fragment">ng add generate my-first-component</p>
+					<p class="fragment">ng new MyApp</p>
+					<p class="fragment">ng add MyAppLibrary</p>
+					<p class="fragment">ng generate HomePage</p>
 					<p class="fragment">ng serve</p>
 					<p class="fragment">ng test</p>
 					<!-- <p class="fragment">ng e2e</p> -->
@@ -466,9 +481,10 @@ export const HomeRoutes = RouterModule.forChild(routes);
 				</section>
 				<section>
 					<h2>Angular schematic</h2>
-					<h3 class="fragment">Write your own generate and add commands!</h3>
-					<h4 class="fragment">Setup new projects instantly</h4>
-					<h4 class="fragment">Setup add your own libraries in one line</h4>
+					<h3 class="fragment">
+						Write your own <span class="angular">generate</span> and add <span class="angular">commands</span>!</h3>
+					<h3 class="fragment">Create install script for your library</h3>
+					<!-- <h3 class="fragment">Setup add your own libraries in one line</h3> -->
 				</section>
 			</section>
 
@@ -478,37 +494,40 @@ export const HomeRoutes = RouterModule.forChild(routes);
 
 			<section>
 				<section>
-					<h2>The drawbacks of angular</h2>
-					<p>Best suited for enterprise-scale applications</p>
-					<p>Largest bundle size</p>
-					<p>Hardest to learn</p>
-					<p>Boilerplate</p>
-					<p>Complex</p>
-					<p>Angular.js != Angular</p>
-					<!-- <p>Performence</p> -->
+					<h2>The drawbacks of <span class="angular">angular</span></h2>
+					<p class="fragment">Best suited for enterprise-scale applications</p>
+					<p class="fragment">Largest bundle size</p>
+					<p class="fragment">Hardest to learn</p>
+					<p class="fragment">Boilerplate</p>
+					<p class="fragment">Complex</p>
+					<p class="fragment">Angular.js != Angular</p>
+					<!-- <p class="fragment">Performence</p> -->
 				</section>
 			</section>
 			<section>
 				<section>
-					<h2>The benefits of angular</h2>
-					<p>The most complete framework with the most features</p>
-					<p>The most powerfull CLI</p>
-					<p>All in one framework</p>
-					<!-- <p>Great tooling</p> -->
-					<p>Easy to onboard new angular developers</p>
-					<!-- <p>TypeScript by default</p> -->
-					<p>Material design, components and CDK</p>
-					<p>Dependency injection</p>
-					<p>Not just web</p>
-					<p>RxJS</p>
-					<!-- <p>Server Side rendering</p> -->
-					<!-- <p>Backed by Google</p> -->
+					<h2>The benefits of <span class="angular">angular</span></h2>
+					<p class="fragment">The most complete framework with the most features</p>
+					<p class="fragment">The most powerfull CLI</p>
+					<p class="fragment">All in one framework</p>
+					<!-- <p class="fragment">Great tooling</p> -->
+					<p class="fragment">Easy to onboard new angular developers</p>
+					<!-- <p class="fragment">TypeScript by default</p> -->
+					<p class="fragment">Material design, components and CDK</p>
+					<p class="fragment">Dependency injection</p>
+					<p class="fragment">Not just web</p>
+					<p class="fragment">RxJS</p>
+					<!-- <p class="fragment">Server Side rendering</p> -->
+					<!-- <p class="fragment">Backed by Google</p> -->
 				</section>
 			</section>
 			<section>
 				<section>
-					<h2>The future for angular</h2>
+					<h1>The future for <span class="angular">angular</span></h1>
 				</section>
+			</section>
+			<section>
+				QnA
 			</section>
 		</div>
 	</div>
