@@ -92,7 +92,7 @@
 					<h5>bit.ly</h5>
 				</section>
 				<section>
-					<h2>What is <span class="angular">Angular</span>, and why use it?</h2>
+					<h1>What is <span class="angular">Angular</span>, and why use it?</h1>
 				</section>
 			</section>
 			<section>
@@ -106,12 +106,11 @@
 			</section>
 			<section>
 				<section>
-					<h1>Angular in a nutshell</h1>
+					<h1><span class="angular">Angular</span> in a nutshell</h1>
 					<ui>
-						<li class="fragment">Framework for developing applications</li>
-						<li class="fragment">Includes all you need to make a SPA</li>
+						<li class="fragment"><span class="angular">Framework</span> for developing applications</li>
+						<li class="fragment">All inclusive</li>
 						<li class="fragment">Significantly speeds up development</li>
-						<li class="fragment">All inclusive, a complete framework</li>
 					</ui>
 				</section>
 			</section>
@@ -165,8 +164,55 @@
 				<!-- <h1>Angular</h1> -->
 			</section>
 			<section>
+				<h2>More features</h2>
+				<div class="flex-icon-row fragment">
+					<div class="flex-icon">
+						<img class="stretch no-border-img" src="media/icons/language-services.svg">
+						Language-services
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/material.svg">
+						Material
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/cdk.svg">
+						CDK
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/animations.svg">
+						animations
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/augury.svg">
+						Augury
+					</div>
+				</div>
+				<div class="flex-icon-row fragment">
+					<div class="flex-icon">
+						<img class="stretch no-border-img" src="media/icons/performance.svg">
+						Performance
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/universal.svg">
+						Universal
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/karma.svg">
+						Karma
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/i18n.svg">
+						i18n
+					</div>
+					<div class="flex-icon">
+						<img class="stretch no-border-img flex-icon-img" src="media/icons/templates.svg">
+						Components
+					</div>
+				</div>
+			</section>
+			<section>
 				<h2>You don't have to learn it all</h2>
-				<h3 class="fragment">Just some core features</h3>
+				<h3 class="fragment">Just some <span class="angular">core features</span></h3>
 			</section>
 			<section>
 				<section>
@@ -227,8 +273,7 @@ export class HomeComponent implements OnInit, OnDestroy {
 // TypeScript (home.component.ts)
 @Component({
 	selector: 'app-home', // use as <app-home></app-home>
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	...
 })
 export class HomeComponent {
 	name = 'Greger';
@@ -261,8 +306,7 @@ export class HomeComponent {
 // TypeScript (home.component.ts)
 @Component({
 	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	...
 })
 export class HomeComponent {
 	@Input() user = ''; // Will become Greger
@@ -276,8 +320,7 @@ export class HomeComponent {
 // TypeScript (home.component.ts)
 @Component({
 	selector: 'app-home',
-	templateUrl: './home.component.html',
-	styleUrls: ['./home.component.scss']
+	...
 })
 export class HomeComponent {
 	@Output() newUser = new EventEmitter();
@@ -306,14 +349,28 @@ export class HomeComponent {
 <ng-content></ng-content> 
 <!-- ng-content will be replaced by Welcome -->
 					</code></pre>
-					<p class="fragment">
-						projectAs="top" & select="top"
-					</p>
+				</section>
+				<section>
+					<h2>ng-content</h2>
+					<h3>projectAs & select</h3>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML (parent component) -->
+
+<app-home>
+	<ng-container projectAs="top">Hello</ng-container>
+	<ng-container projectAs="bottom">Home</ng-container>
+</app-home>
+					</code></pre>
+					<pre><code class="HTML" data-trim contenteditable>
+<!-- HTML (home.component.html) -->
+
+<ng-content select="top"></ng-content> 
+<ng-content select="bottom"></ng-content> 
+					</code></pre>
 				</section>
 
-
 				<section>
-					Structural directives
+					<h2>Structural directives</h2>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
 <!-- ngIf (loading = bool) -->
 <div *ngIf="loading">Loading</div>
@@ -396,7 +453,7 @@ export class HomeComponent implements OnInit {
 				<section>
 					<h1 class="angular">Modules</h1>
 					<!-- <h3>Collection of components, and other elements</h3> -->
-					<h3>Grouping relevant elements together</h3>
+					<h3 class="fragment">Grouping relevant elements together</h3>
 					<h3 class="fragment">Create/declare components</h3>
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
 // home.module.ts
@@ -421,7 +478,7 @@ export class HomeModule { }
 				</section>
 				<section>
 					<pre class=""><code class="TypeScript" data-trim contenteditable>
-<!-- Eager (default) -->
+// Eager (default)
 const routes: Routes = [{
 	path: 'home', // localhost:4200/home
 	component: HomeComponent,
@@ -429,7 +486,7 @@ const routes: Routes = [{
 export const HomeRoutes = RouterModule.forChild(routes);
 					</code></pre>
 					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
-<!-- Lazy -->
+// Lazy
 const routes: Routes = [{
 	path: 'home', // localhost:4200/home
 	loadChildren: () => import('./home.module').then(mod => mod.HomeModule)
@@ -446,10 +503,10 @@ export const HomeRoutes = RouterModule.forChild(routes);
 
 			<section>
 				<section>
-					<h1>Other core features</h1>
-					<h2 class="fragment">Directives</h2>
-					<h2 class="fragment">Pipes</h2>
-					<h2 class="fragment">Interceptors</h2>
+					<h2>Other core features</h2>
+					<h3 class="fragment">Directives</h3>
+					<h3 class="fragment">Pipes</h3>
+					<h3 class="fragment">Interceptors</h3>
 				</section>
 				<section>
 					<h2>Angular NPM Modules</h2>
@@ -461,14 +518,14 @@ export const HomeRoutes = RouterModule.forChild(routes);
 						<li class="fragment">Http</li>
 						<li class="fragment">Language service</li>
 						<li class="fragment">localization</li>
-						<li class="fragment">localizationService worker</li>
+						<li class="fragment">Service worker</li>
 					</ul>
 				</section>
 			</section>
 
 			<section>
 				<section>
-					<h2>Angular CLI</h2>
+					<h2><span class="angular">Angular</span> CLI</h2>
 					<!-- <h3>The most powerful frontend CLI</h3> -->
 					<p class="fragment">ng new MyApp</p>
 					<p class="fragment">ng add MyAppLibrary</p>
@@ -480,10 +537,11 @@ export const HomeRoutes = RouterModule.forChild(routes);
 					<p class="fragment">ng deploy</p>
 				</section>
 				<section>
-					<h2>Angular schematic</h2>
+					<h2><span class="angular">Angular</span> schematic</h2>
 					<h3 class="fragment">
-						Write your own <span class="angular">generate</span> and add <span class="angular">commands</span>!</h3>
-					<h3 class="fragment">Create install script for your library</h3>
+						Write your own <span class="angular">generate</span>
+						and <span class="angular">add</span> commands!</h3>
+					<h3 class="fragment">Create <span class="angular">install</span> script for your library</h3>
 					<!-- <h3 class="fragment">Setup add your own libraries in one line</h3> -->
 				</section>
 			</section>
@@ -496,11 +554,11 @@ export const HomeRoutes = RouterModule.forChild(routes);
 				<section>
 					<h2>The drawbacks of <span class="angular">angular</span></h2>
 					<p class="fragment">Best suited for enterprise-scale applications</p>
+					<p class="fragment">Angular.js != Angular</p>
 					<p class="fragment">Largest bundle size</p>
 					<p class="fragment">Hardest to learn</p>
 					<p class="fragment">Boilerplate</p>
 					<p class="fragment">Complex</p>
-					<p class="fragment">Angular.js != Angular</p>
 					<!-- <p class="fragment">Performence</p> -->
 				</section>
 			</section>
@@ -508,13 +566,13 @@ export const HomeRoutes = RouterModule.forChild(routes);
 				<section>
 					<h2>The benefits of <span class="angular">angular</span></h2>
 					<p class="fragment">The most complete framework with the most features</p>
-					<p class="fragment">The most powerfull CLI</p>
-					<p class="fragment">All in one framework</p>
-					<!-- <p class="fragment">Great tooling</p> -->
 					<p class="fragment">Easy to onboard new angular developers</p>
 					<!-- <p class="fragment">TypeScript by default</p> -->
 					<p class="fragment">Material design, components and CDK</p>
+					<p class="fragment">The most powerfull CLI</p>
+					<!-- <p class="fragment">Great tooling</p> -->
 					<p class="fragment">Dependency injection</p>
+					<p class="fragment">All in one framework</p>
 					<p class="fragment">Not just web</p>
 					<p class="fragment">RxJS</p>
 					<!-- <p class="fragment">Server Side rendering</p> -->
@@ -524,6 +582,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 			<section>
 				<section>
 					<h1>The future for <span class="angular">angular</span></h1>
+					<h3>Angular 9 & <span class="angular">IVY</span></h3>
 				</section>
 			</section>
 			<section>
