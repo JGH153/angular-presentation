@@ -37,6 +37,10 @@
 			text-transform: unset !important;
 		}
 
+		.unset-transform {
+			text-transform: unset !important;
+		}
+
 		.angular {
 			color: #DD0031 !important;
 		}
@@ -213,7 +217,7 @@
 				</div>
 			</section>
 			<section>
-				<h2>You don't have to learn it all</h2>
+				<h2>You don't have to <span class="angular">learn</span> it all</h2>
 				<h3 class="fragment">Just some <span class="angular">core features</span></h3>
 			</section>
 			<section>
@@ -318,7 +322,11 @@ export class HomeComponent {
 
 				<section>
 					<h3>Output</h3>
-					<pre class=""><code class="TypeScript" data-trim contenteditable>
+					<pre class=""><code class="HTML" data-trim contenteditable>
+<!-- HTML (parent component) -->
+<app-home (newUser)="setNewUser($event)"></app-home>
+					</code></pre>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
 // TypeScript (home.component.ts)
 @Component({
 	selector: 'app-home',
@@ -332,10 +340,7 @@ export class HomeComponent {
 	}
 }							  
 					</code></pre>
-					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- HTML (parent component) -->
-<app-home (newUser)="setNewUser($event)"></app-home>
-					</code></pre>
+
 				</section>
 
 				<section>
@@ -468,7 +473,7 @@ export class HomeComponent implements OnInit {
 	declarations: [HomeComponent],
 	exports: [HomeComponent]
 })
-export class HomeModule { }							  
+export class HomeModule { }	
 				</code></pre>
 				</section>
 				<section>
@@ -479,7 +484,7 @@ export class HomeModule { }
 			<section>
 				<section>
 					<h1 class="angular">Routing</h1>
-					<h3>Eager loading vs Lazy loading</h3>
+					<h3 class="fragment">Eager loading vs Lazy loading</h3>
 
 				</section>
 				<section>
@@ -491,25 +496,26 @@ const routes: Routes = [{
 }]; 
 export const HomeRoutes = RouterModule.forChild(routes);
 					</code></pre>
-					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
-// Lazy
-const routes: Routes = [{
-	path: 'home', // localhost:4200/home
-	loadChildren: () => import('./home.module').then(mod => mod.HomeModule)
-}]; 
-export const HomeRoutes = RouterModule.forChild(routes);
-					</code></pre>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
 <!-- HTML -->
 <router-outlet></router-outlet>
 					</code></pre>
+					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+// Lazy
+const routes: Routes = [{
+	path: 'home', // localhost:4200/home
+	loadChildren: () => import('./home.module').then(m => m.HomeModule)
+}]; 
+export const HomeRoutes = RouterModule.forChild(routes);
+					</code></pre>
+
 				</section>
 
 			</section>
 
 			<section>
 				<section>
-					<h2>Other core features</h2>
+					<h2>Other <span class="angular">core</span> features</h2>
 					<h3 class="fragment">Directives</h3>
 					<h3 class="fragment">Pipes</h3>
 					<h3 class="fragment">Interceptors</h3>
@@ -553,14 +559,10 @@ export const HomeRoutes = RouterModule.forChild(routes);
 			</section>
 
 			<section>
-				Typescript?
-			</section>
-
-			<section>
 				<section>
-					<h2>The drawbacks of <span class="angular">angular</span></h2>
+					<h2>The drawbacks of <span class="angular">Angular</span></h2>
 					<p class="fragment">Best suited for enterprise-scale applications</p>
-					<p class="fragment">Angular.js != Angular</p>
+					<p class="fragment">angular.js != Angular</p>
 					<p class="fragment">Largest bundle size</p>
 					<p class="fragment">Hardest to learn</p>
 					<p class="fragment">Boilerplate</p>
@@ -570,7 +572,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 			</section>
 			<section>
 				<section>
-					<h2>The benefits of <span class="angular">angular</span></h2>
+					<h2>The benefits of <span class="angular">Angular</span></h2>
 					<p class="fragment">The most complete framework with the most features</p>
 					<p class="fragment">Easy to onboard new angular developers</p>
 					<p class="fragment">Material design, components and CDK</p>
@@ -595,7 +597,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 				<img class="stretch no-border-img" data-src="media/angular.svg">
 			</section>
 			<section>
-				QnA
+				<h1 class="unset-transform">QnA</h1>	
 			</section>
 		</div>
 	</div>
