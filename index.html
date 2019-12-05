@@ -102,6 +102,8 @@
 					<span class="angular">P</span>age
 					<span class="angular">A</span>pplication
 				</h1>
+				<h2>VS</h2>
+				<h2>Server Side Rendering</h2>
 				<h2 class="fragment">It's all just <span class="angular">index.html</span></h2>
 			</section>
 			<section>
@@ -316,7 +318,7 @@ export class HomeComponent {
 
 				<section>
 					<h3>Output</h3>
-					<pre class="fragment"><code class="TypeScript" data-trim contenteditable>
+					<pre class=""><code class="TypeScript" data-trim contenteditable>
 // TypeScript (home.component.ts)
 @Component({
 	selector: 'app-home',
@@ -337,13 +339,17 @@ export class HomeComponent {
 				</section>
 
 				<section>
+					<h2>Data flows down, events go up</h2>
+				</section>
+
+				<section>
 					<h2>ng-content</h2>
-					<pre><code class="HTML" data-trim contenteditable>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
 <!-- HTML (parent component) -->
 
 <app-home>Welcome</app-home>
 					</code></pre>
-					<pre><code class="HTML" data-trim contenteditable>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
 <!-- HTML (home.component.html) -->
 
 <ng-content></ng-content> 
@@ -376,14 +382,14 @@ export class HomeComponent {
 <div *ngIf="loading">Loading</div>
 					</code></pre>
 					<pre class="fragment"><code class="HTML" data-trim contenteditable>
-<!-- ngFor (users = Array)-->
-<div *ngFor="let user of users">user{{user.name}}</div>
-					</code></pre>
-					<pre class="fragment"><code class="HTML" data-trim contenteditable>
 <!-- ng-container (loading = bool) -->
 <ng-container *ngIf="loading">Loading</ng-container>
 					</code></pre>
-					<p class="fragment">ng-template</p>
+					<pre class="fragment"><code class="HTML" data-trim contenteditable>
+<!-- ngFor (users = Array)-->
+<div *ngFor="let user of users">user{{user.name}}</div>
+					</code></pre>
+
 					<p class="fragment">*ngSwitch</p>
 				</section>
 				<!-- <section>
@@ -508,7 +514,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 					<h3 class="fragment">Pipes</h3>
 					<h3 class="fragment">Interceptors</h3>
 				</section>
-				<section>
+				<!-- <section>
 					<h2>Angular NPM Modules</h2>
 					<ul>
 						<li class="fragment">Core</li>
@@ -520,7 +526,7 @@ export const HomeRoutes = RouterModule.forChild(routes);
 						<li class="fragment">localization</li>
 						<li class="fragment">Service worker</li>
 					</ul>
-				</section>
+				</section> -->
 			</section>
 
 			<section>
@@ -567,12 +573,12 @@ export const HomeRoutes = RouterModule.forChild(routes);
 					<h2>The benefits of <span class="angular">angular</span></h2>
 					<p class="fragment">The most complete framework with the most features</p>
 					<p class="fragment">Easy to onboard new angular developers</p>
-					<!-- <p class="fragment">TypeScript by default</p> -->
 					<p class="fragment">Material design, components and CDK</p>
 					<p class="fragment">The most powerfull CLI</p>
-					<!-- <p class="fragment">Great tooling</p> -->
 					<p class="fragment">Dependency injection</p>
-					<p class="fragment">All in one framework</p>
+					<p class="fragment">TypeScript by default</p>
+					<!-- <p class="fragment">Great tooling</p> -->
+					<!-- <p class="fragment">All in one framework</p> -->
 					<p class="fragment">Not just web</p>
 					<p class="fragment">RxJS</p>
 					<!-- <p class="fragment">Server Side rendering</p> -->
@@ -582,8 +588,11 @@ export const HomeRoutes = RouterModule.forChild(routes);
 			<section>
 				<section>
 					<h1>The future for <span class="angular">angular</span></h1>
-					<h3>Angular 9 & <span class="angular">IVY</span></h3>
+					<h3 class="fragment">Angular 9 & <span class="angular">IVY</span></h3>
 				</section>
+			</section>
+			<section>
+				<img class="stretch no-border-img" data-src="media/angular.svg">
 			</section>
 			<section>
 				QnA
